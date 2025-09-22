@@ -17,6 +17,42 @@ function checkinputs() {
     const passwordconfirmationValue = passwordconfirmation.value;
 
 
+    if (usernameValue === '') {
+        setErrorFor(username, 'campo obrigatorio');
+    } else {
+        setSuccessFor(username);
+    }
+
+
+    if (emailValue === '') {
+        setErrorFor(email, 'campo obrigatorio');
+    }
+    else if (!checkEmail(emailValue)) {
+        setErrorFor(email, 'email invalido');
+    } else { 
+        setSuccessFor(email); 
+    }
+
+
+    if (passwordValue === '') {
+        setErrorFor(password, 'campo obrigatorio');
+    }
+    else if (passwordValue.length < 8) {
+        setErrorFor(password, 'minimo oito caracteres');
+    } else { 
+        setSuccessFor(password) 
+    }
+
+
+    if (passwordconfirmationValue === '') {
+        setErrorFor(passwordconfirmation, 'campo obrigatorio');
+    }
+    else if (passwordconfirmationValue !== passwordValue) {
+        setErrorFor(passwordconfirmation, 'senhas não conferem');
+    } else { 
+        setSuccessFor(passwordconfirmation); 
+    }
+
 }
 
 function setErrorFor(input, message) {
