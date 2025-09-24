@@ -6,9 +6,41 @@ const passwordconfirmation = document.getElementById('password-confirmation');
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-
     checkinputs();
+     checkcampos();
 })
+
+function checktipo(){
+ const select = document.getElementById('tipo');
+ let valor = select.value;
+ let caixacfp = document.getElementById('cpf');
+ let label = document.getElementById("tipo1");
+ let caixacnpj = document.getElementById('cnpj');
+
+ if (valor === 'pf' ) {
+   caixacfp.style.display = "block";
+   caixacnpj.style.display = "none";
+ } 
+ if (valor === '00'){
+    caixacfp.style.display = "none"
+ }
+//  if (valor === 'pj' ) {
+//     caixacnpj.style.display = "block";
+//     caixacfp.style.display = "none"
+//   } 
+
+}
+checktipo()
+
+function checkcampos(){
+    const pf = document.getElementById('pf')
+   
+    if (pf.value.length !== 11){
+        setErrorFor(pf,"O CPF deve ter 11 números" );
+    }else{
+        setSuccessFor(pf);
+    }
+}
 
 function checkinputs() {
     const usernameValue = username.value;
