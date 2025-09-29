@@ -5,6 +5,21 @@
   font-family: 'Poppins', sans-serif;
 }
 
+.box{
+  border: 2px solid #f0f0f0;
+  display: block;
+  border-radius: 10px;
+  font-size: 14px;
+  width: 100%;
+  padding: 10px;
+}
+#campoCpf{
+  display: none;
+}
+#campoCnpj{
+  display: none;
+}
+
 body {
   width: 100%;
   min-height: 100vh;
@@ -43,8 +58,7 @@ body {
   margin-bottom: 5px;
 }
 
-.form-control input,
-.form-control select {
+.form-control input {
   border: 2px solid #f0f0f0;
   display: block;
   border-radius: 10px;
@@ -65,6 +79,7 @@ body {
   bottom: 0;
   left: 0;
   visibility: hidden;
+  font-size: 12px;
 }
 
 .form button {
@@ -82,13 +97,14 @@ body {
   background-color: #c62828;
 }
 
-.form-control.success input,
-.form-control.success select {
+
+
+
+.form-control.success input {
   border-color: #2ecc71;
 }
 
-.form-control.error input,
-.form-control.error select {
+.form-control.error input {
   border-color: #e74c3c;
 }
 
@@ -105,8 +121,4 @@ body {
 .form-control.error small {
   visibility: visible;
   color: #e74c3c;
-}
-
-.campo {
-  display: none;
 }
