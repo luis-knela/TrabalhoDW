@@ -1,84 +1,105 @@
 const form = document.getElementById('form');
-      const username = document.getElementById('username');
-      const email = document.getElementById('email');
-      const password = document.getElementById('password');
-      const passwordconfirmation = document.getElementById('password-confirmation');
-      const select = document.getElementById("tipoPessoa");
-      const campoCpf = document.getElementById("campoCpf");
-      const campoCnpj = document.getElementById("campoCnpj");
-      const cnpj = document.getElementById("cnpj");
+const username = document.getElementById('username');
+const email = document.getElementById('email');
+const password = document.getElementById('password');
+const passwordconfirmation = document.getElementById('password-confirmation');
+const select = document.getElementById("tipoPessoa");
+const campoCpf = document.getElementById("campoCpf");
+const campoCnpj = document.getElementById("campoCnpj");
+const cpf = document.getElementById("cpf");
+const cnpj = document.getElementById("cnpj");
 
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        checkinputs();
-      })
+function mostrarCampo() {
+  if (select.value === "pf") {
+    campoCpf.style.display = "block";
+    campoCnpj.style.display = "none";
+  } else if (select.value === "pj") {
+    campoCnpj.style.display = "block";
+    campoCpf.style.display = "none";
+  } else {
+    campoCpf.style.display = "none";
+    campoCnpj.style.display = "none";
+  }
+}
 
-      function checkinputs() {
-        const usernameValue = username.value;
-        const emailValue = email.value;
-        const passwordValue = password.value;
-        const passwordconfirmationValue = passwordconfirmation.value;
-        const cnpjValue = cnpj.value;
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  checkinputs();
+});
 
-        if (usernameValue === '') {
-          setErrorFor(username, 'campo obrigatório');
-        } else {
-          setSuccessFor(username);
-        }
+function checkinputs() {
+  const usernameValue = username.value;
+  const emailValue = email.value;
+  const passwordValue = password.value;
+  const passwordconfirmationValue = passwordconfirmation.value;
+  const cpfValue = cpf.value;
+  const cnpjValue = cnpj.value;
 
-        if (emailValue === '') {
-          setErrorFor(email, 'campo obrigatório');
-        }
-        else if (!checkEmail(emailValue)) {
-          setErrorFor(email, 'email inválido');
-        } else { 
-          setSuccessFor(email); 
-        }
+  if (usernameValue === '') {
+    setErrorFor(username, 'campo obrigatório');
+  } else {
+    setSuccessFor(username);
+  }
 
-        if (passwordValue === '') {
-          setErrorFor(password, 'campo obrigatório');
-        }
-        else if (passwordValue.length < 8) {
-          setErrorFor(password, 'mínimo oito caracteres');
-        } else { 
-          setSuccessFor(password) 
-        }
+  if (emailValue === '') {
+    setErrorFor(email, 'campo obrigatório');
+  } else if (!checkEmail(emailValue)) {
+    setErrorFor(email, 'email inválido');
+  } else {
+    setSuccessFor(email);
+  }
 
-        if (passwordconfirmationValue === '') {
-          setErrorFor(passwordconfirmation, 'campo obrigatório');
-        }
-        else if (passwordconfirmationValue !== passwordValue) {
-          setErrorFor(passwordconfirmation, 'senhas não conferem');
-        } else { 
-          setSuccessFor(passwordconfirmation); 
-        }
+  if (passwordValue === '') {
+    setErrorFor(password, 'campo obrigatório');
+  } else if (passwordValue.length < 8) {
+    setErrorFor(password, 'mínimo oito caracteres');
+  } else {
+    setSuccessFor(password);
+  }
 
-        
-        if (select.value === "pj") { 
-          if (cnpjValue === "") {
-            setErrorFor(cnpj, "campo obrigatório");
-          } else if (!/^[0-9]{14}$/.test(cnpjValue)) {
-            setErrorFor(cnpj, "CNPJ deve conter 14 dígitos");
-          } else {
-            setSuccessFor(cnpj);
-          }
-        }
-      }
+  if (passwordconfirmationValue === '') {
+    setErrorFor(passwordconfirmation, 'campo obrigatório');
+  } else if (passwordconfirmationValue !== passwordValue) {
+    setErrorFor(passwordconfirmation, 'senhas não conferem');
+  } else {
+    setSuccessFor(passwordconfirmation);
+  }
 
-      function setErrorFor(input, message) {
-        const formControl = input.parentElement;
-        const small = formControl.querySelector('small');
-        small.innerText = message;
-        formControl.className = 'form-control error';
-      }
+  if (select.value === "pf") {
+    if (cpfValue === "") {
+      setErrorFor(cpf, "campo obrigatório");
+    } else if (!/^[0-9]{11}$/.test(cpfValue)) {
+      setErrorFor(cpf, "CPF deve conter 11 dígitos");
+    } else {
+      setSuccessFor(cpf);
+    }
+  }
 
-      function setSuccessFor(input) {
-        const formControl = input.parentElement;
-        formControl.className = 'form-control success';
-      }
+  if (select.value === "pj") {
+    if (cnpjValue === "") {
+      setErrorFor(cnpj, "campo obrigatório");
+    } else if (!/^[0-9]{14}$/.test(cnpjValue)) {
+      setErrorFor(cnpj, "CNPJ deve conter 14 dígitos");
+    } else {
+      setSuccessFor(cnpj);
+    }
+  }
+}
 
-      function checkEmail(email) {
-        return /^(([^<>()\[\]\\.,;:\s@']+(\.[^<>()\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-          email
-        );
-         }
+function setErrorFor(input, message) {
+  const formControl = input.parentElement;
+  const small = formControl.querySelector('small');
+  small.innerText = message;
+  formControl.className = 'form-control error';
+}
+
+function setSuccessFor(input) {
+  const formControl = input.parentElement;
+  formControl.className = 'form-control success';
+}
+
+function checkEmail(email) {
+  return /^(([^<>()\[\]\\.,;:\s@']+(\.[^<>()\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+    email
+  );
+}
